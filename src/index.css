@@ -4,6 +4,11 @@
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -13,6 +18,7 @@ body {
   background-color: #fafafa;
   color: #333;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 .app {
@@ -20,6 +26,8 @@ body {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .header {
@@ -179,9 +187,12 @@ body {
 .image-preview {
   max-width: 100%;
   max-height: 300px;
+  height: auto;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   background: repeating-conic-gradient(#f3f4f6 0% 25%, white 0% 50%) 50% / 20px 20px;
+  display: block;
+  object-fit: contain;
 }
 
 .metadata {
@@ -209,6 +220,7 @@ body {
 .output-textarea {
   width: 100%;
   min-height: 200px;
+  max-height: 400px;
   padding: 1rem;
   border: 1px solid #d1d5db;
   border-radius: 6px;
@@ -216,6 +228,9 @@ body {
   font-size: 0.875rem;
   resize: vertical;
   background: #f8fafc;
+  overflow-y: auto;
+  overflow-x: hidden;
+  word-wrap: break-word;
 }
 
 .button-group {
