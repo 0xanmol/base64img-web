@@ -94,22 +94,26 @@ function App() {
         throw new Error('Canvas context not available')
       }
 
-      if (fitToSquare) {
+      // Get current values at processing time
+      const currentFitToSquare = fitToSquare
+      const currentCanvasSize = canvasSize
+
+      if (currentFitToSquare) {
         // Set canvas to square dimensions
-        canvas.width = canvasSize
-        canvas.height = canvasSize
+        canvas.width = currentCanvasSize
+        canvas.height = currentCanvasSize
 
         // Calculate scale to fit image within square while maintaining aspect ratio
-        const scale = Math.min(canvasSize / img.naturalWidth, canvasSize / img.naturalHeight)
+        const scale = Math.min(currentCanvasSize / img.naturalWidth, currentCanvasSize / img.naturalHeight)
         const scaledWidth = img.naturalWidth * scale
         const scaledHeight = img.naturalHeight * scale
 
         // Center the image
-        const x = (canvasSize - scaledWidth) / 2
-        const y = (canvasSize - scaledHeight) / 2
+        const x = (currentCanvasSize - scaledWidth) / 2
+        const y = (currentCanvasSize - scaledHeight) / 2
 
         // Clear canvas with transparent background
-        ctx.clearRect(0, 0, canvasSize, canvasSize)
+        ctx.clearRect(0, 0, currentCanvasSize, currentCanvasSize)
         
         // Draw image centered
         ctx.drawImage(img, x, y, scaledWidth, scaledHeight)
@@ -140,7 +144,7 @@ function App() {
     } finally {
       setIsProcessing(false)
     }
-  }, [canvasSize, fitToSquare])
+  }, [])
 
   const handleFileSelect = (file: File) => {
     setSelectedFile(file)
@@ -236,7 +240,7 @@ function App() {
       }, 100)
       return () => clearTimeout(timeoutId)
     }
-  }, [canvasSize, fitToSquare, selectedFile, processImage, isProcessing])
+  }, [canvasSize, fitToSquare, selectedFile])
 
   return (
     <div className="app">
